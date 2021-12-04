@@ -111,6 +111,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
   Future<ParseResponse> save() async {
     final ParseResponse childrenResponse = await _saveChildren(this);
     if (childrenResponse.success) {
+      for (ParseObject o in childrenResponse.results!) await o.pin();
       ParseResponse? response;
       if (objectId == null) {
         response = await create();
