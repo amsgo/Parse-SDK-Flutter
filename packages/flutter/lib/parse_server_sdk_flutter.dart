@@ -166,6 +166,11 @@ class CoreStoreSembastImp implements sdk.CoreStoreSembastImp {
     return CoreStoreSembastImp._();
   }
 
+  static Future<void> deleteInstance({DatabaseFactory? factory}) async {
+    await sdk.CoreStoreSembastImp.deleteInstance(await dbDirectory(),
+        factory: factory);
+  }
+
   @override
   Future<bool> clear() async {
     await _sembastImp!.clear();
