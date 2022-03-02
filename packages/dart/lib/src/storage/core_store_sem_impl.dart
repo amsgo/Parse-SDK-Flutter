@@ -39,6 +39,12 @@ class CoreStoreSembastImp implements CoreStore {
     return _instance!;
   }
 
+  static Future<void> deleteInstance(String dbPath,
+      {DatabaseFactory? factory}) async {
+    factory ??= !parseIsWeb ? databaseFactoryIo : databaseFactoryWeb;
+    await factory.deleteDatabase(dbPath);
+  }
+
   final Database _database;
   final StoreRef<String, dynamic> _store;
 
