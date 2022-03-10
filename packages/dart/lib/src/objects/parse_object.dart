@@ -112,13 +112,10 @@ class ParseObject extends ParseBase implements ParseCloneable {
     final ParseResponse childrenResponse = await _saveChildren(this);
     if (childrenResponse.success) {
       for (var o in childrenResponse.results!) {
-        switch (o.runtimeType) {
-          case ParseObject:
-            await o.pin();
-            break;
-          case ParseError:
-            print(o);
-        }
+        if (o.runtimeType == ParseError)
+          print('[${childrenResponse.results!.indexOf(o)}]: $o');
+        else
+          await o.pin();
       }
       ParseResponse? response;
       if (objectId == null) {
