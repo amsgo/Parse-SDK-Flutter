@@ -137,18 +137,7 @@ class Parse extends sdk.Parse
 
 Future<String> dbDirectory() async {
   String dbDirectory = '';
-<<<<<<< refs/remotes/origin/master:packages/flutter/lib/parse_server_sdk_flutter.dart
   dbDirectory = await CoreStoreDirectory().getDatabaseDirectory();
-=======
-  if (!sdk.parseIsWeb &&
-      (Platform.isIOS ||
-          Platform.isAndroid ||
-          Platform.isMacOS ||
-          Platform.isLinux ||
-          Platform.isWindows)) {
-    dbDirectory = (await getApplicationSupportDirectory()).path;
-  }
->>>>>>> Use app support directory for db file:packages/flutter/lib/parse_server_sdk.dart
   return path.join('$dbDirectory/parse', 'parse.db');
 }
 

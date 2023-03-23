@@ -16,10 +16,6 @@ dependencies:
 #  parse_server_sdk:
 #     path: ../dart
 
-  # Uncomment for test with Github Branch
-  parse_server_sdk:
-     path: ../dart
-
 #  # Uncomment for test with Github Branch
 #  parse_server_sdk:
 #     path: ../dart
