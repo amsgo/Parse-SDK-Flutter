@@ -167,7 +167,7 @@ abstract class ParseBase {
 
   /// Returns the objects variables
   @protected
-  Map<String, dynamic> _getObjectData() => _objectData;
+  Map<String, dynamic> getObjectData() => _objectData;
 
   bool containsValue(Object value) {
     return _getObjectData().containsValue(value);
