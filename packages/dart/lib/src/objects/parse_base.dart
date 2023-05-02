@@ -41,7 +41,7 @@ abstract class ParseBase {
       return true;
     }
     bool match = false;
-    _getObjectData().forEach((String key, dynamic value) {
+    getObjectData().forEach((String key, dynamic value) {
       if (value is ParseObject && value._areChildrenDirty(seenObjects)) {
         match = true;
       }
@@ -92,7 +92,7 @@ abstract class ParseBase {
     }
 
     final Map<String, dynamic> target =
-        forApiRQ ? _unsavedChanges : _getObjectData();
+        forApiRQ ? _unsavedChanges : getObjectData();
     target.forEach((String key, dynamic value) {
       if (!map.containsKey(key)) {
         map[key] = parseEncode(value, full: full);
@@ -130,25 +130,25 @@ abstract class ParseBase {
       if (key == parseClassName || key == '__type') {
         // NO OP
       } else if (key == keyVarObjectId) {
-        _getObjectData()[keyVarObjectId] = value;
+        getObjectData()[keyVarObjectId] = value;
       } else if (key == keyVarCreatedAt) {
         if (value is String) {
-          _getObjectData()[keyVarCreatedAt] = _parseDateFormat.parse(value);
+          getObjectData()[keyVarCreatedAt] = _parseDateFormat.parse(value);
         } else {
-          _getObjectData()[keyVarCreatedAt] = value;
+          getObjectData()[keyVarCreatedAt] = value;
         }
       } else if (key == keyVarUpdatedAt) {
         if (value is String) {
-          _getObjectData()[keyVarUpdatedAt] = _parseDateFormat.parse(value);
+          getObjectData()[keyVarUpdatedAt] = _parseDateFormat.parse(value);
         } else {
-          _getObjectData()[keyVarUpdatedAt] = value;
+          getObjectData()[keyVarUpdatedAt] = value;
         }
       } else if (key == keyVarAcl) {
-        _getObjectData()[keyVarAcl] = ParseACL().fromJson(value);
+        getObjectData()[keyVarAcl] = ParseACL().fromJson(value);
       } else {
-        _getObjectData()[key] = parseDecode(value);
+        getObjectData()[key] = parseDecode(value);
         if (addInUnSave) {
-          _unsavedChanges[key] = _getObjectData()[key];
+          _unsavedChanges[key] = getObjectData()[key];
         }
       }
     });
@@ -170,11 +170,11 @@ abstract class ParseBase {
   Map<String, dynamic> getObjectData() => _objectData;
 
   bool containsValue(Object value) {
-    return _getObjectData().containsValue(value);
+    return getObjectData().containsValue(value);
   }
 
   bool containsKey(String key) {
-    return _getObjectData().containsKey(key);
+    return getObjectData().containsKey(key);
   }
 
   dynamic operator [](String key) {
@@ -201,16 +201,16 @@ abstract class ParseBase {
   /// [bool] forceUpdate is always true, if unsure as to whether an item is
   /// needed or not, set to false
   void set<T>(String key, T value, {bool forceUpdate = true}) {
-    if (_getObjectData().containsKey(key)) {
-      if (_getObjectData()[key] == value && !forceUpdate) {
+    if (getObjectData().containsKey(key)) {
+      if (getObjectData()[key] == value && !forceUpdate) {
         return;
       }
-      _getObjectData()[key] =
+      getObjectData()[key] =
           ParseMergeTool().mergeWithPrevious(_unsavedChanges[key], value);
     } else {
-      _getObjectData()[key] = value;
+      getObjectData()[key] = value;
     }
-    _unsavedChanges[key] = _getObjectData()[key];
+    _unsavedChanges[key] = getObjectData()[key];
   }
 
   /// Gets type [T] from objectData
@@ -219,8 +219,8 @@ abstract class ParseBase {
   /// getType<int> and an int will be returned, null, or a defaultValue if
   /// provided
   T? get<T>(String key, {T? defaultValue}) {
-    if (_getObjectData().containsKey(key)) {
-      return _getObjectData()[key] as T?;
+    if (getObjectData().containsKey(key)) {
+      return getObjectData()[key] as T?;
     } else {
       return defaultValue;
     }
@@ -275,8 +275,8 @@ abstract class ParseBase {
 
   ///Access the [ParseACL] governing this object.
   ParseACL getACL() {
-    if (_getObjectData().containsKey(keyVarAcl)) {
-      return _getObjectData()[keyVarAcl];
+    if (getObjectData().containsKey(keyVarAcl)) {
+      return getObjectData()[keyVarAcl];
     } else {
       return ParseACL();
     }

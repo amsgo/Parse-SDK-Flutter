@@ -283,7 +283,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
           }
         }
       }
-    } else if (!_canbeSerialized(aftersaving, value: _getObjectData())) {
+    } else if (!_canbeSerialized(aftersaving, value: getObjectData())) {
       return false;
     }
     // TODO(yulingtianxia): handle ACL
@@ -338,7 +338,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
       seen.add(object);
 
       if (!_collectionDirtyChildren(
-          object._getObjectData(), uniqueObjects, uniqueFiles, seen, seenNew)) {
+          object.getObjectData(), uniqueObjects, uniqueFiles, seen, seenNew)) {
         return false;
       }
 
