@@ -14,19 +14,15 @@ dependencies:
 #  parse_server_sdk: ^4.0.0
 
   # Uncomment for local testing
-  parse_server_sdk:
-     path: ../dart
-
-#  # Uncomment for test with Github Branch
 #  parse_server_sdk:
 #     path: ../dart
 
 #  # Uncomment to use Github Branch
-#  parse_server_sdk:
-#    git:
-#      url: https://github.com/amsgo/Parse-SDK-Flutter
-#      ref: beschluss-app-customization
-#      path: packages/dart
+  parse_server_sdk:
+    git:
+      url: https://github.com/amsgo/Parse-SDK-Flutter
+      ref: beschluss-app-customization
+      path: packages/dart
 
   # Networking
   dio: ^5.0.1
