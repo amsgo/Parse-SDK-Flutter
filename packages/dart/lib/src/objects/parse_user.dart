@@ -406,11 +406,11 @@ class ParseUser extends ParseObject implements ParseCloneable {
   }
 
   @override
-  Future<ParseResponse> update() async {
+  Future<ParseResponse> update({Map<String, dynamic>? changes}) async {
     if (objectId == null) {
       return await signUp();
     } else {
-      final ParseResponse response = await super.update();
+      final ParseResponse response = await super.update(changes: changes);
       if (response.success) {
         await _onResponseSuccess();
       }

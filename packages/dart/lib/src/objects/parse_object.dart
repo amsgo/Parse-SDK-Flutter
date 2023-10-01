@@ -85,7 +85,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
     }
   }
 
-  Future<ParseResponse> update() async {
+  Future<ParseResponse> update({Map<String, dynamic>? changes}) async {
     assert(
       objectId != null && (objectId?.isNotEmpty ?? false),
       "Can't update a parse object while the objectId property is null or empty",
@@ -93,7 +93,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
 
     try {
       final Uri url = getSanitisedUri(_client, '$_path/$objectId');
-      final String body = json.encode(toJson(forApiRQ: true));
+      final String body = json.encode(changes ?? toJson(forApiRQ: true));
       _saveChanges();
       final Map<String, String> headers = {
         keyHeaderContentType: keyHeaderContentTypeJson
