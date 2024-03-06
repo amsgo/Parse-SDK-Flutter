@@ -191,7 +191,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
 
       for (List<ParseObject> chunk in chunks) {
         final List<dynamic> requests = chunk.map<dynamic>((ParseObject obj) {
-          return obj._getRequestJson(obj.objectId == null ? 'POST' : 'PUT');
+          return obj.getRequestJson(obj.objectId == null ? 'POST' : 'PUT');
         }).toList();
 
         for (ParseObject obj in chunk) {
@@ -249,7 +249,7 @@ class ParseObject extends ParseBase implements ParseCloneable {
     _savingChanges.clear();
   }
 
-  dynamic _getRequestJson(String method) {
+  dynamic getRequestJson(String method) {
     final Uri tempUri = Uri.parse(ParseCoreData().serverUrl);
     final String parsePath = tempUri.path;
     final dynamic request = <String, dynamic>{
